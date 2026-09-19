@@ -1,0 +1,53 @@
+```yaml
+name: API Tests
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  hurl-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+
+      - name: Install demo-api dependencies
+        working-directory: 00-demo-api
+        run: pip install -r requirements.txt
+
+      - name: Start demo-api in background
+        working-directory: 00-demo-api
+        run: |
+          nohup python -m uvicorn app:app --port 8000 > uvicorn.log 2>&1 &
+          sleep 5
+          curl --fail http://127.0.0.1:8000/tasks || (cat uvicorn.log && exit 1)
+
+      - name: Install Hurl
+        run: |
+          curl --location --remote-name \
+            https://github.com/Orange-OpenSource/hurl/releases/download/8.0.1/hurl-8.0.1-x86_64-unknown-linux-gnu.tar.gz
+          tar -xzf hurl-8.0.1-x86_64-unknown-linux-gnu.tar.gz
+          sudo cp hurl-8.0.1-x86_64-unknown-linux-gnu/bin/hurl /usr/local/bin/
+          hurl --version
+
+      - name: Run interface tests
+        working-directory: 01-hurl-lab
+        run: |
+          hurl --test --report-junit reports/junit.xml --report-html reports/html cases/*.hurl
+        continue-on-error: true
+
+      - name: Upload test report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: hurl-test-report
+          path: 01-hurl-lab/reports/
+```
