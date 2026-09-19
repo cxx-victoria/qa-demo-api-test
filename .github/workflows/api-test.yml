@@ -1,35 +1,32 @@
-```yaml
 name: API Tests
-
 on:
   push:
   pull_request:
-  workflow_dispatch:
-
+  workflow_dispatch: # 支持网页手动触发流水线
 jobs:
   hurl-test:
-    runs-on: ubuntu-latest
-
+    runs-on: ubuntu-latest # Ubuntu虚拟机环境
     steps:
+      # 1.拉取仓库代码
       - name: Checkout code
         uses: actions/checkout@v4
-
+      # 2.安装Python3.13
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.13'
-
+      # 3.进入00-demo-api目录，安装后端接口服务依赖
       - name: Install demo-api dependencies
         working-directory: 00-demo-api
         run: pip install -r requirements.txt
-
+      # 4.后台启动uvicorn接口服务，等待5秒，curl校验服务是否成功启动
       - name: Start demo-api in background
         working-directory: 00-demo-api
         run: |
           nohup python -m uvicorn app:app --port 8000 > uvicorn.log 2>&1 &
           sleep 5
           curl --fail http://127.0.0.1:8000/tasks || (cat uvicorn.log && exit 1)
-
+      # 5.下载安装Hurl8.0.1
       - name: Install Hurl
         run: |
           curl --location --remote-name \
@@ -37,17 +34,16 @@ jobs:
           tar -xzf hurl-8.0.1-x86_64-unknown-linux-gnu.tar.gz
           sudo cp hurl-8.0.1-x86_64-unknown-linux-gnu/bin/hurl /usr/local/bin/
           hurl --version
-
+      # 6.执行Hurl接口测试，生成junit和html报告；continue-on-error:true 就算用例失败，流水线job不会直接中断
       - name: Run interface tests
         working-directory: 01-hurl-lab
         run: |
           hurl --test --report-junit reports/junit.xml --report-html reports/html cases/*.hurl
         continue-on-error: true
-
+      # 7.无论测试成功失败(if:always())，上传测试报告到制品
       - name: Upload test report
         uses: actions/upload-artifact@v4
         if: always()
         with:
           name: hurl-test-report
           path: 01-hurl-lab/reports/
-```
