@@ -1,0 +1,6 @@
+﻿.venv/
+__pycache__/
+*.pyc
+tasks.db
+01-hurl-lab/reports/
+tools/

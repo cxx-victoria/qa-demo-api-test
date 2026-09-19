@@ -1,0 +1,14 @@
+
+# 边界：标题是 3 个空格 —— "看起来有内容，其实是空白"
+POST http://127.0.0.1:8000/login
+Content-Type: application/json
+{ "username": "tester", "password": "123456" }
+HTTP 200
+[Captures]
+token: jsonpath "$.token"
+
+POST http://127.0.0.1:8000/tasks
+Authorization: Bearer {{token}}
+Content-Type: application/json
+{ "title": "   ", "done": false }
+HTTP 422
