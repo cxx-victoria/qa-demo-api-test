@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<testsuites errors="0" failures="0" skipped="6" tests="6" time="0.002909">
+  <testsuite name="schemathesis" hostname="LAPTOP-8KAIDUIT" errors="0" failures="0" skipped="6" tests="6" time="0.002909">
+    <testcase name="POST /chat" time="0.000520">
+      <skipped type="skipped">No examples in schema</skipped>
+    </testcase>
+    <testcase name="POST /login" time="0.000250">
+      <skipped type="skipped">No examples in schema</skipped>
+    </testcase>
+    <testcase name="POST /tasks" time="0.000852">
+      <skipped type="skipped">No examples in schema</skipped>
+    </testcase>
+    <testcase name="GET /tasks" time="0.000795">
+      <skipped type="skipped">No examples in schema</skipped>
+    </testcase>
+    <testcase name="GET /tasks/{task_id}" time="0.000288">
+      <skipped type="skipped">No examples in schema</skipped>
+    </testcase>
+    <testcase name="DELETE /tasks/{task_id}" time="0.000203">
+      <skipped type="skipped">No examples in schema</skipped>
+    </testcase>
+  </testsuite>
+</testsuites>

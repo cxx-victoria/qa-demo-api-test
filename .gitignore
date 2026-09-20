@@ -6,12 +6,16 @@ tasks.db
 tools/
 docs/
 _trash/
-
-
 # 运行日志（uvicorn.log 已有 27MB，绝不能提交）
 *.log
-
 # 环境变量文件（以后配 API Key 会用到，提前防住）
 .env
 .env.*
-
+# pytest缓存
+.pytest_cache/
+# Schemathesis本地缓存（重点！不要提交缓存）
+.schemathesis/
+.hypothesis/
+# 操作系统文件
+.DS_Store
+Thumbs.db

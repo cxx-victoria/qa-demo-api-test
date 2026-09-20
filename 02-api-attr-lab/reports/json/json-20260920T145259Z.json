@@ -1,0 +1,110 @@
+{
+  "schemathesis_version": "4.27.5",
+  "command": "st run http://127.0.0.1:8000/openapi.json --max-examples 50 --report json --report-dir reports\\json",
+  "seed": 106279466330189559746650756320690649857,
+  "started_at": "2026-09-20T06:53:00.350715+00:00",
+  "running_time": 8.061978199984878,
+  "stop_reason": "completed",
+  "complete": true,
+  "exit_code": 1,
+  "operations": {
+    "total": 6,
+    "selected": 6,
+    "tested": 6,
+    "errored": 0,
+    "skipped": 0,
+    "skip_reasons": []
+  },
+  "phases": {
+    "examples": {
+      "status": "skip",
+      "skip_reason": null
+    },
+    "coverage": {
+      "status": "failure",
+      "skip_reason": null
+    },
+    "fuzzing": {
+      "status": "failure",
+      "skip_reason": null
+    },
+    "stateful": {
+      "status": "failure",
+      "skip_reason": null
+    }
+  },
+  "test_cases": {
+    "generated": 727,
+    "with_failures": 9,
+    "unique_failures": 11,
+    "without_checks": 0
+  },
+  "failures": [
+    {
+      "type": "ServerError",
+      "title": "Server error",
+      "severity": "critical",
+      "count": 2,
+      "operations": [
+        "GET /tasks/{task_id}",
+        "Stateful tests"
+      ]
+    },
+    {
+      "type": "AcceptedNegativeData",
+      "title": "API accepted schema-violating request",
+      "severity": "medium",
+      "count": 1,
+      "operations": [
+        "GET /tasks"
+      ]
+    },
+    {
+      "type": "AllowHeaderMismatch",
+      "title": "Invalid Allow header",
+      "severity": "medium",
+      "count": 2,
+      "operations": [
+        "OPTIONS /tasks",
+        "OPTIONS /tasks/{task_id}"
+      ]
+    },
+    {
+      "type": "UndefinedStatusCode",
+      "title": "Undocumented HTTP status code",
+      "severity": "medium",
+      "count": 6,
+      "operations": [
+        "DELETE /tasks/{task_id}",
+        "GET /tasks/{task_id}",
+        "POST /chat",
+        "POST /login",
+        "POST /tasks",
+        "Stateful tests"
+      ]
+    }
+  ],
+  "errors": [],
+  "baseline": null,
+  "filtered": 0,
+  "warnings": {
+    "missing_auth": [
+      "POST /login",
+      "POST /tasks"
+    ],
+    "base_url_mismatch": [],
+    "missing_test_data": [],
+    "validation_mismatch": [],
+    "missing_deserializer": [],
+    "unused_openapi_auth": [],
+    "unsupported_regex": [],
+    "method_not_allowed": [],
+    "constants_extraction": [],
+    "unmatched_filter": [],
+    "unresolvable_reference": []
+  },
+  "auth": {
+    "reauth_count": 0,
+    "reauth_broke": false
+  }
+}

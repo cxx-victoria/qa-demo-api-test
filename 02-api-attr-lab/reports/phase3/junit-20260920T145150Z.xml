@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<testsuites errors="0" failures="6" skipped="0" tests="6" time="1.228924">
+  <testsuite name="schemathesis" hostname="LAPTOP-8KAIDUIT" errors="0" failures="6" skipped="0" tests="6" time="1.228924">
+    <testcase name="POST /chat" time="0.177174">
+      <failure type="failure">1. Test Case ID: OjDngb
+
+- Undocumented HTTP status code
+
+    Received: 400
+    Documented: 200, 422
+
+[400] Bad Request:
+
+    `{"detail":"There was an error parsing the body"}`
+
+Reproduce with:
+
+    curl -X POST -H 'Content-Type: application/json' -d $'�2�8G\x01(W7' http://127.0.0.1:8000/chat
+    
+    ⚠️  Request body contains non-printable characters. Actual value: b'\xef\xbf\xbd2\xef\xbf\xbd8G\x01(W7'</failure>
+    </testcase>
+    <testcase name="POST /login" time="0.008215">
+      <failure type="failure">1. Test Case ID: Z04MfW
+
+- Undocumented HTTP status code
+
+    Received: 401
+    Documented: 200, 422
+
+[401] Unauthorized:
+
+    `{"detail":"用户名或密码错误"}`
+
+Reproduce with:
+
+    curl -X POST -H 'Content-Type: application/json' -d '{"password": "", "username": ""}' http://127.0.0.1:8000/login</failure>
+    </testcase>
+    <testcase name="POST /tasks" time="0.010215">
+      <failure type="failure">1. Test Case ID: cX5Qyu
+
+- Undocumented HTTP status code
+
+    Received: 401
+    Documented: 201, 422
+
+[401] Unauthorized:
+
+    `{"detail":"缺少 Bearer token"}`
+
+Reproduce with:
+
+    curl -X POST -H 'Content-Type: application/json' -d '{"title": ""}' http://127.0.0.1:8000/tasks</failure>
+    </testcase>
+    <testcase name="GET /tasks" time="0.982251">
+      <failure type="failure">1. Test Case ID: DfPu8v
+
+- Server error
+
+- Undocumented HTTP status code
+
+    Received: 500
+    Documented: 200, 422
+
+[500] Internal Server Error:
+
+    `Internal Server Error`
+
+Reproduce with:
+
+    curl -X GET 'http://127.0.0.1:8000/tasks?%C2%BF%C2%A4%C3%B7%C2%89B%C3%A7=&amp;%16%C2%B4%F4%86%B5%B3%C3%AF%C3%BE%5BV%F4%81%9D%B5%C2%8D=true&amp;%C3%AF%2F%F3%96%9A%B2%3F%19%C3%BF%C2%AD%C3%8E%C2%99%F0%91%83%9B=%C3%88&amp;limit=6392560823488836796416&amp;offset=972&amp;=%5B%27null%27%2C+-4.2629422728819517e-131%2C+%27null%27%5D&amp;=%13%08%F0%B4%81%AB%F3%88%AB%965%F2%B7%B9%B2n%F4%8C%91%A3%26J%F3%81%B2%9F%C2%BF&amp;=%D8%A7%D9%84%D9%83%D9%84+%D9%81%D9%8A+%D8%A7%D9%84%D9%85%D8%AC%D9%85%D9%88+%D8%B9%D8%A9'</failure>
+    </testcase>
+    <testcase name="GET /tasks/{task_id}" time="0.022297">
+      <failure type="failure">1. Test Case ID: yOo7XG
+
+- Server error
+
+- Undocumented HTTP status code
+
+    Received: 500
+    Documented: 200, 422
+
+[500] Internal Server Error:
+
+    `Internal Server Error`
+
+Reproduce with:
+
+    curl -X GET http://127.0.0.1:8000/tasks/0</failure>
+    </testcase>
+    <testcase name="DELETE /tasks/{task_id}" time="0.028773">
+      <failure type="failure">1. Test Case ID: WkDge5
+
+- Undocumented HTTP status code
+
+    Received: 404
+    Documented: 204, 422
+
+[404] Not Found:
+
+    `{"detail":"任务不存在"}`
+
+Reproduce with:
+
+    curl -X DELETE http://127.0.0.1:8000/tasks/0</failure>
+    </testcase>
+  </testsuite>
+</testsuites>

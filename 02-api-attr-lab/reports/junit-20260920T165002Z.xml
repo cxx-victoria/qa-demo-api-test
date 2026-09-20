@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<testsuites errors="0" failures="6" skipped="0" tests="7" time="8.633735">
+  <testsuite name="schemathesis" hostname="LAPTOP-8KAIDUIT" errors="0" failures="6" skipped="0" tests="7" time="8.633735">
+    <testcase name="POST /chat" time="0.546052">
+      <failure type="failure">1. Test Case ID: Mnljkm
+
+- Undocumented HTTP status code
+
+    Received: 400
+    Documented: 200, 422
+
+[400] Bad Request:
+
+    `{"detail":"There was an error parsing the body"}`
+
+Reproduce with:
+
+    curl -X POST -H 'Content-Type: application/json' -d $'�f�\x0e-' http://127.0.0.1:8000/chat
+    
+    ⚠️  Request body contains non-printable characters. Actual value: b'\xef\xbf\xbdf\xef\xbf\xbd\x0e-'</failure>
+    </testcase>
+    <testcase name="POST /login" time="0.055189">
+      <failure type="failure">1. Test Case ID: cQ4AYu
+
+- Undocumented HTTP status code
+
+    Received: 401
+    Documented: 200, 422
+
+[401] Unauthorized:
+
+    `{"detail":"用户名或密码错误"}`
+
+Reproduce with:
+
+    curl -X POST -H 'Content-Type: application/json' -d '{"username": "", "password": ""}' http://127.0.0.1:8000/login</failure>
+    </testcase>
+    <testcase name="POST /tasks" time="0.026667">
+      <failure type="failure">1. Test Case ID: gODIO2
+
+- Invalid Allow header
+
+    `Allow` header does not match the schema — missing documented methods: GET
+
+    List exactly the methods this resource supports in `Allow`
+
+[405] Method Not Allowed:
+
+    `{"detail":"Method Not Allowed"}`
+
+Reproduce with:
+
+    curl -X OPTIONS -H 'authorization: [Filtered]' -H 'Content-Type: application/json' -d '{"title": "", "done": false}' http://127.0.0.1:8000/tasks</failure>
+      <failure type="failure">1. Test Case ID: 1e3ooe
+
+- Undocumented HTTP status code
+
+    Received: 401
+    Documented: 201, 422
+
+[401] Unauthorized:
+
+    `{"detail":"缺少 Bearer token"}`
+
+Reproduce with:
+
+    curl -X POST -H 'Content-Type: application/json' -d '{"title": ""}' http://127.0.0.1:8000/tasks</failure>
+    </testcase>
+    <testcase name="GET /tasks" time="0.657807">
+      <failure type="failure">1. Test Case ID: rp1NNn
+
+- API accepted schema-violating request
+
+    Invalid data should have been rejected
+    Expected: 400, 401, 403, 404, 405, 406, 409, 415, 422, 428, 429, 5xx
+    Invalid component: in query - object with unexpected properties
+
+[200] OK:
+
+    `[{"id":"0609c9ed374640ac97ef95d9c22cac60","title":"检查返回类型","done":false},{"id":"c1673b13d1804c7b9e5a4277e7b0d0de","title":"检查返回类型","done":false},{"id":"a429fd7684c84f4a8af470a06d0b5fd9","title":"检查返回类型","done":false},{"id":"decbee72c25b4e3ca17f0e2df4270aa9","title":"检查返回类型","done":false},{"id":"2d3fd90fe4f6479387c31de0dd279686","title":"检查返回类型","done":false},{"id":"6ea83b2c2bce4e7bb7c693e5cbe41193","title":"我的第一条自动化用例","done":false},{"id":"ff548d1faa4a4b1b9ca4fce529fb3f1d","title":"这条数据会被未登录的人删掉","done":fal // Output truncated...`
+
+Reproduce with:
+
+    curl -X GET 'http://127.0.0.1:8000/tasks?offset=0&amp;x-schemathesis-unknown-property=42'</failure>
+      <failure type="failure">1. Test Case ID: AK1dDx
+
+- Server error
+
+- Undocumented HTTP status code
+
+    Received: 500
+    Documented: 200, 422
+
+[500] Internal Server Error:
+
+    `Internal Server Error`
+
+Reproduce with:
+
+    curl -X GET 'http://127.0.0.1:8000/tasks?limit=10400227554452166656'</failure>
+    </testcase>
+    <testcase name="GET /tasks/{task_id}" time="0.024125">
+      <failure type="failure">1. Test Case ID: xry2Wn
+
+- Invalid Allow header
+
+    `Allow` header does not match the schema — missing documented methods: DELETE
+
+    List exactly the methods this resource supports in `Allow`
+
+[405] Method Not Allowed:
+
+    `{"detail":"Method Not Allowed"}`
+
+Reproduce with:
+
+    curl -X OPTIONS http://127.0.0.1:8000/tasks/0</failure>
+      <failure type="failure">1. Test Case ID: nd3dVc
+
+- Server error
+
+- Undocumented HTTP status code
+
+    Received: 500
+    Documented: 200, 422
+
+[500] Internal Server Error:
+
+    `Internal Server Error`
+
+Reproduce with:
+
+    curl -X GET http://127.0.0.1:8000/tasks/0</failure>
+    </testcase>
+    <testcase name="DELETE /tasks/{task_id}" time="0.025854">
+      <failure type="failure">1. Test Case ID: 48QIJo
+
+- Undocumented HTTP status code
+
+    Received: 404
+    Documented: 204, 422
+
+[404] Not Found:
+
+    `{"detail":"任务不存在"}`
+
+Reproduce with:
+
+    curl -X DELETE http://127.0.0.1:8000/tasks/0</failure>
+    </testcase>
+    <testcase name="Stateful tests" time="7.298040" />
+  </testsuite>
+</testsuites>
