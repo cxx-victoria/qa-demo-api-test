@@ -1,0 +1,41 @@
+TAP version 13
+1..39
+ok 1 - D:\qa-projects\01-hurl-lab\cases\00_smoke.hurl
+ok 2 - D:\qa-projects\01-hurl-lab\cases\10_flow_login_create_query.hurl
+not ok 3 - D:\qa-projects\01-hurl-lab\cases\11_flow_query_missing_id.hurl
+ok 4 - D:\qa-projects\01-hurl-lab\cases\20_boundary_login_fail.hurl
+not ok 5 - D:\qa-projects\01-hurl-lab\cases\30_defect_D1_long_title.hurl
+not ok 6 - D:\qa-projects\01-hurl-lab\cases\31_defect_D2_missing_id.hurl
+not ok 7 - D:\qa-projects\01-hurl-lab\cases\32_defect_D3_delete_without_auth.hurl
+not ok 8 - D:\qa-projects\01-hurl-lab\cases\33_defect_D4_done_type.hurl
+ok 9 - D:\qa-projects\01-hurl-lab\cases\40_normal_login.hurl
+ok 10 - D:\qa-projects\01-hurl-lab\cases\41_normal_create_task.hurl
+ok 11 - D:\qa-projects\01-hurl-lab\cases\42_normal_list_tasks.hurl
+ok 12 - D:\qa-projects\01-hurl-lab\cases\43_normal_get_task.hurl
+ok 13 - D:\qa-projects\01-hurl-lab\cases\44_normal_delete_task.hurl
+ok 14 - D:\qa-projects\01-hurl-lab\cases\45_normal_chat.hurl
+not ok 15 - D:\qa-projects\01-hurl-lab\cases\50_boundary_title_empty.hurl
+ok 16 - D:\qa-projects\01-hurl-lab\cases\51_boundary_title_1_char.hurl
+ok 17 - D:\qa-projects\01-hurl-lab\cases\52_boundary_title_100_chars.hurl
+not ok 18 - D:\qa-projects\01-hurl-lab\cases\53_boundary_title_101_chars.hurl
+not ok 19 - D:\qa-projects\01-hurl-lab\cases\54_boundary_title_10000_chars.hurl
+not ok 20 - D:\qa-projects\01-hurl-lab\cases\55_boundary_title_spaces.hurl
+ok 21 - D:\qa-projects\01-hurl-lab\cases\56_boundary_title_emoji.hurl
+ok 22 - D:\qa-projects\01-hurl-lab\cases\57_boundary_title_chinese.hurl
+not ok 23 - D:\qa-projects\01-hurl-lab\cases\60_type_done_string.hurl
+not ok 24 - D:\qa-projects\01-hurl-lab\cases\61_type_done_number.hurl
+ok 25 - D:\qa-projects\01-hurl-lab\cases\62_type_done_null.hurl
+ok 26 - D:\qa-projects\01-hurl-lab\cases\63_type_missing_title.hurl
+ok 27 - D:\qa-projects\01-hurl-lab\cases\64_type_extra_field.hurl
+ok 28 - D:\qa-projects\01-hurl-lab\cases\70_error_no_token.hurl
+ok 29 - D:\qa-projects\01-hurl-lab\cases\71_error_bad_token.hurl
+not ok 30 - D:\qa-projects\01-hurl-lab\cases\72_error_task_not_found.hurl
+ok 31 - D:\qa-projects\01-hurl-lab\cases\73_error_method_not_allowed.hurl
+ok 32 - D:\qa-projects\01-hurl-lab\cases\74_error_limit_invalid.hurl
+ok 33 - D:\qa-projects\01-hurl-lab\cases\80_idempotent_create_twice.hurl
+ok 34 - D:\qa-projects\01-hurl-lab\cases\81_idempotent_delete_twice.hurl
+ok 35 - D:\qa-projects\01-hurl-lab\cases\82_idempotent_login_twice.hurl
+ok 36 - D:\qa-projects\01-hurl-lab\cases\90_security_sql_injection.hurl
+ok 37 - D:\qa-projects\01-hurl-lab\cases\91_security_xss.hurl
+not ok 38 - D:\qa-projects\01-hurl-lab\cases\92_security_unauthorized_delete.hurl
+ok 39 - D:\qa-projects\01-hurl-lab\cases\93_security_token_reuse_after_relogin.hurl

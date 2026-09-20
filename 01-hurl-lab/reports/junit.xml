@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?><testsuites><testsuite tests="7" errors="0" failures="4"><testcase id="C:\Users\A\Documents\Codex\2026-09-18\github-ai-issue-discussion-github-github\outputs\hurl-lab\cases\00_smoke.hurl" name="C:\Users\A\Documents\Codex\2026-09-18\github-ai-issue-discussion-github-github\outputs\hurl-lab\cases\00_smoke.hurl" time="0.009" /><testcase id="C:\Users\A\Documents\Codex\2026-09-18\github-ai-issue-discussion-github-github\outputs\hurl-lab\cases\10_flow_login_create_query.hurl" name="C:\Users\A\Documents\Codex\2026-09-18\github-ai-issue-discussion-github-github\outputs\hurl-lab\cases\10_flow_login_create_query.hurl" time="0.057" /><testcase id="C:\Users\A\Documents\Codex\2026-09-18\github-ai-issue-discussion-github-github\outputs\hurl-lab\cases\20_boundary_login_fail.hurl" name="C:\Users\A\Documents\Codex\2026-09-18\github-ai-issue-discussion-github-github\outputs\hurl-lab\cases\20_boundary_login_fail.hurl" time="0.007" /><testcase id="C:\Users\A\Documents\Codex\2026-09-18\github-ai-issue-discussion-github-github\outputs\hurl-lab\cases\30_defect_D1_long_title.hurl" name="C:\Users\A\Documents\Codex\2026-09-18\github-ai-issue-discussion-github-github\outputs\hurl-lab\cases\30_defect_D1_long_title.hurl" time="0.010"><failure>Assert status code
+  --&gt; C:\Users\A\Documents\Codex\2026-09-18\github-ai-issue-discussion-github-github\outputs\hurl-lab\cases\30_defect_D1_long_title.hurl:23:6
+   |
+   | POST http://127.0.0.1:8000/tasks
+   | ...
+23 | HTTP 201
+   |      ^^^ actual value is &lt;422&gt;
+   |</failure></testcase><testcase id="C:\Users\A\Documents\Codex\2026-09-18\github-ai-issue-discussion-github-github\outputs\hurl-lab\cases\31_defect_D2_missing_id.hurl" name="C:\Users\A\Documents\Codex\2026-09-18\github-ai-issue-discussion-github-github\outputs\hurl-lab\cases\31_defect_D2_missing_id.hurl" time="0.014"><failure>Assert status code
+  --&gt; C:\Users\A\Documents\Codex\2026-09-18\github-ai-issue-discussion-github-github\outputs\hurl-lab\cases\31_defect_D2_missing_id.hurl:10:6
+   |
+   | GET http://127.0.0.1:8000/tasks/this-id-does-not-exist
+10 | HTTP 404
+   |      ^^^ actual value is &lt;500&gt;
+   |</failure></testcase><testcase id="C:\Users\A\Documents\Codex\2026-09-18\github-ai-issue-discussion-github-github\outputs\hurl-lab\cases\32_defect_D3_delete_without_auth.hurl" name="C:\Users\A\Documents\Codex\2026-09-18\github-ai-issue-discussion-github-github\outputs\hurl-lab\cases\32_defect_D3_delete_without_auth.hurl" time="0.083"><failure>Assert status code
+  --&gt; C:\Users\A\Documents\Codex\2026-09-18\github-ai-issue-discussion-github-github\outputs\hurl-lab\cases\32_defect_D3_delete_without_auth.hurl:26:6
+   |
+   | DELETE http://127.0.0.1:8000/tasks/{{task_id}}
+26 | HTTP 401
+   |      ^^^ actual value is &lt;204&gt;
+   |</failure></testcase><testcase id="C:\Users\A\Documents\Codex\2026-09-18\github-ai-issue-discussion-github-github\outputs\hurl-lab\cases\33_defect_D4_done_type.hurl" name="C:\Users\A\Documents\Codex\2026-09-18\github-ai-issue-discussion-github-github\outputs\hurl-lab\cases\33_defect_D4_done_type.hurl" time="0.025"><failure>Assert failure
+  --&gt; C:\Users\A\Documents\Codex\2026-09-18\github-ai-issue-discussion-github-github\outputs\hurl-lab\cases\33_defect_D4_done_type.hurl:23:0
+   |
+   | POST http://127.0.0.1:8000/tasks
+   | ...
+23 | jsonpath "$.done" isBoolean
+   |   actual:   integer &lt;0&gt;
+   |   expected: boolean
+   |</failure></testcase></testsuite><testsuite tests="7" errors="0" failures="4"><testcase id="C:\Users\A\Documents\Codex\2026-09-18\github-ai-issue-discussion-github-github\outputs\hurl-lab\cases\00_smoke.hurl" name="C:\Users\A\Documents\Codex\2026-09-18\github-ai-issue-discussion-github-github\outputs\hurl-lab\cases\00_smoke.hurl" time="0.012" /><testcase id="C:\Users\A\Documents\Codex\2026-09-18\github-ai-issue-discussion-github-github\outputs\hurl-lab\cases\10_flow_login_create_query.hurl" name="C:\Users\A\Documents\Codex\2026-09-18\github-ai-issue-discussion-github-github\outputs\hurl-lab\cases\10_flow_login_create_query.hurl" time="0.084" /><testcase id="C:\Users\A\Documents\Codex\2026-09-18\github-ai-issue-discussion-github-github\outputs\hurl-lab\cases\20_boundary_login_fail.hurl" name="C:\Users\A\Documents\Codex\2026-09-18\github-ai-issue-discussion-github-github\outputs\hurl-lab\cases\20_boundary_login_fail.hurl" time="0.007" /><testcase id="C:\Users\A\Documents\Codex\2026-09-18\github-ai-issue-discussion-github-github\outputs\hurl-lab\cases\30_defect_D1_long_title.hurl" name="C:\Users\A\Documents\Codex\2026-09-18\github-ai-issue-discussion-github-github\outputs\hurl-lab\cases\30_defect_D1_long_title.hurl" time="0.015"><failure>Assert status code
+  --&gt; C:\Users\A\Documents\Codex\2026-09-18\github-ai-issue-discussion-github-github\outputs\hurl-lab\cases\30_defect_D1_long_title.hurl:23:6
+   |
+   | POST http://127.0.0.1:8000/tasks
+   | ...
+23 | HTTP 201
+   |      ^^^ actual value is &lt;422&gt;
+   |</failure></testcase><testcase id="C:\Users\A\Documents\Codex\2026-09-18\github-ai-issue-discussion-github-github\outputs\hurl-lab\cases\31_defect_D2_missing_id.hurl" name="C:\Users\A\Documents\Codex\2026-09-18\github-ai-issue-discussion-github-github\outputs\hurl-lab\cases\31_defect_D2_missing_id.hurl" time="0.012"><failure>Assert status code
+  --&gt; C:\Users\A\Documents\Codex\2026-09-18\github-ai-issue-discussion-github-github\outputs\hurl-lab\cases\31_defect_D2_missing_id.hurl:10:6
+   |
+   | GET http://127.0.0.1:8000/tasks/this-id-does-not-exist
+10 | HTTP 404
+   |      ^^^ actual value is &lt;500&gt;
+   |</failure></testcase><testcase id="C:\Users\A\Documents\Codex\2026-09-18\github-ai-issue-discussion-github-github\outputs\hurl-lab\cases\32_defect_D3_delete_without_auth.hurl" name="C:\Users\A\Documents\Codex\2026-09-18\github-ai-issue-discussion-github-github\outputs\hurl-lab\cases\32_defect_D3_delete_without_auth.hurl" time="0.041"><failure>Assert status code
+  --&gt; C:\Users\A\Documents\Codex\2026-09-18\github-ai-issue-discussion-github-github\outputs\hurl-lab\cases\32_defect_D3_delete_without_auth.hurl:26:6
+   |
+   | DELETE http://127.0.0.1:8000/tasks/{{task_id}}
+26 | HTTP 401
+   |      ^^^ actual value is &lt;204&gt;
+   |</failure></testcase><testcase id="C:\Users\A\Documents\Codex\2026-09-18\github-ai-issue-discussion-github-github\outputs\hurl-lab\cases\33_defect_D4_done_type.hurl" name="C:\Users\A\Documents\Codex\2026-09-18\github-ai-issue-discussion-github-github\outputs\hurl-lab\cases\33_defect_D4_done_type.hurl" time="0.052"><failure>Assert failure
+  --&gt; C:\Users\A\Documents\Codex\2026-09-18\github-ai-issue-discussion-github-github\outputs\hurl-lab\cases\33_defect_D4_done_type.hurl:23:0
+   |
+   | POST http://127.0.0.1:8000/tasks
+   | ...
+23 | jsonpath "$.done" isBoolean
+   |   actual:   integer &lt;0&gt;
+   |   expected: boolean
+   |</failure></testcase></testsuite></testsuites>

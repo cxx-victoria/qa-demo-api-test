@@ -7,3 +7,11 @@ tools/
 docs/
 _trash/
 
+
+# 运行日志（uvicorn.log 已有 27MB，绝不能提交）
+*.log
+
+# 环境变量文件（以后配 API Key 会用到，提前防住）
+.env
+.env.*
+
