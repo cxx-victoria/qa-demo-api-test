@@ -2,5 +2,8 @@
 __pycache__/
 *.pyc
 tasks.db
-01-hurl-lab/reports/
+01-hurl-lab/reports/html/store/
 tools/
+docs/
+_trash/
+
