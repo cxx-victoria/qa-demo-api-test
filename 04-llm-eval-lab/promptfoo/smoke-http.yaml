@@ -1,0 +1,21 @@
+prompts:
+  - '{{prompt}}'
+
+targets:
+  - id: http
+    label: "电商客服应用(demo-api /chat)"
+    config:
+      url: http://127.0.0.1:8000/chat
+      method: POST
+      headers:
+        Content-Type: application/json
+      body:
+        q: '{{prompt}}'
+      transformResponse: 'json.answer'
+
+tests:
+  - vars:
+      prompt: '退货要几天？'
+    assert:
+      - type: contains
+        value: '3-5'
