@@ -1,0 +1,43 @@
+name: LLM Quality Gate
+
+on:
+  push:
+    paths:
+      - '04-llm-eval-lab/**'          # 只有改动 LLM 测试目录时才跑，省额度
+  workflow_dispatch:
+
+jobs:
+  llm-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+
+      - name: Install dependencies
+        working-directory: 00-demo-api
+        run: pip install -r requirements.txt
+
+      - name: Start demo-api (reads API key from secrets)
+        working-directory: 00-demo-api
+        env:
+          OPENAI_BASE_URL: ${{ secrets.OPENAI_BASE_URL }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          DEMO_CHAT_MODEL: ${{ secrets.DEMO_CHAT_MODEL }}
+        run: |
+          nohup python -m uvicorn app:app --port 8000 > uvicorn.log 2>&1 &
+          sleep 5
+
+      - name: Install deepeval
+        working-directory: 04-llm-eval-lab
+        run: pip install -r requirements.txt
+
+      - name: Run LLM quality tests
+        working-directory: 04-llm-eval-lab
+        env:
+          OPENAI_BASE_URL: ${{ secrets.OPENAI_BASE_URL }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          DEMO_CHAT_MODEL: ${{ secrets.DEMO_CHAT_MODEL }}
+        run: deepeval test run test_chatbot.py

@@ -19,3 +19,7 @@ _trash/
 # 操作系统文件
 .DS_Store
 Thumbs.db
+
+# DeepEval 运行缓存/记录（每次跑都会变，机器相关）
+.deepeval/
+

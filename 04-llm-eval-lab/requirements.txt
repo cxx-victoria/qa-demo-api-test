@@ -1,0 +1,3 @@
+deepeval>=4.0
+pytest>=8.0
+requests>=2.32
