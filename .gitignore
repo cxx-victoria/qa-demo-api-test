@@ -36,3 +36,7 @@ node_modules/
 05-midscene-lab/playwright-report/
 05-midscene-lab/test-results/
 
+
+# EvalScope 用的 Python 3.12 环境
+.venv312/
+
