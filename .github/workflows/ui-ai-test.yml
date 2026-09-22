@@ -1,0 +1,44 @@
+name: AI UI Tests
+
+on:
+  workflow_dispatch:          # 手动触发（AI 测试要花钱，别每次 push 都跑）
+ # schedule:
+   # - cron: '0 18 * * *'      # 每天 UTC 18:00（北京时间凌晨 2 点）跑一次
+
+jobs:
+  midscene:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install deps
+        working-directory: 05-midscene-lab
+        run: npm install
+
+      - name: Install browser
+        working-directory: 05-midscene-lab
+        run: npx playwright install --with-deps chromium
+
+      - name: Run AI UI tests
+        working-directory: 05-midscene-lab
+        env:
+          MIDSCENE_MODEL_BASE_URL: ${{ secrets.MIDSCENE_MODEL_BASE_URL }}
+          MIDSCENE_MODEL_API_KEY: ${{ secrets.MIDSCENE_MODEL_API_KEY }}
+          MIDSCENE_MODEL_NAME: ${{ secrets.MIDSCENE_MODEL_NAME }}
+          MIDSCENE_MODEL_FAMILY: ${{ secrets.MIDSCENE_MODEL_FAMILY }}
+        run: |
+          # CI 没有显示器，用 xvfb 提供虚拟屏幕（否则截图可能全黑，对应 issue #2970）
+          xvfb-run -a npx playwright test tests/02_todo_full.spec.ts
+
+      - name: Upload reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: midscene-reports
+          path: |
+            05-midscene-lab/midscene_run/
+            05-midscene-lab/playwright-report/

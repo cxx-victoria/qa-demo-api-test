@@ -23,3 +23,16 @@ Thumbs.db
 # DeepEval 运行缓存/记录（每次跑都会变，机器相关）
 .deepeval/
 
+
+# Promptfoo 自动生成的用例文件（每次跑都会重新生成）
+04-llm-eval-lab/promptfoo/redteam.yaml
+
+
+# ---------- Node ----------
+node_modules/
+
+# ---------- Midscene / Playwright 运行产物（体积大 + 每次跑都重新生成）----------
+05-midscene-lab/midscene_run/
+05-midscene-lab/playwright-report/
+05-midscene-lab/test-results/
+

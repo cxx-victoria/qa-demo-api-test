@@ -1,0 +1,346 @@
+{
+  "config": {
+    "argv": [
+      "D:\\Nodejs\\node.exe",
+      "D:\\qa-projects\\05-midscene-lab\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "02_todo_full",
+      "--reporter=json"
+    ],
+    "configFile": "D:\\qa-projects\\05-midscene-lab\\playwright.config.ts",
+    "rootDir": "D:/qa-projects/05-midscene-lab/tests",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "D:/qa-projects/05-midscene-lab/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "D:/qa-projects/05-midscene-lab/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 120000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 8,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "02_todo_full.spec.ts",
+      "file": "02_todo_full.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "02 添加三条待办并检查数量",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 7819,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "Midscene - report file updated: D:\\qa-projects\\05-midscene-lab\\midscene_run\\report\\playwright-2026-09-22_10-50-23-080ad9f9.html\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-22T02:50:20.971Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e3f2c87e5799ecf46b94-3702c6735b597ee4839e",
+          "file": "02_todo_full.spec.ts",
+          "line": 50,
+          "column": 5
+        },
+        {
+          "title": "03 勾选完成并检查状态",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 13954,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "Midscene - report file updated: D:\\qa-projects\\05-midscene-lab\\midscene_run\\report\\playwright-2026-09-22_10-50-31-209db033.html\n"
+                    }
+                  ],
+                  "stderr": [
+                    {
+                      "text": "[Midscene] [midscene:warning] waitForNetworkIdle is skipped for Playwright. Playwright does not provide an equivalent underlying capability for the intended post-action network idle behavior here.\n"
+                    }
+                  ],
+                  "retry": 0,
+                  "startTime": "2026-09-22T02:50:29.393Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e3f2c87e5799ecf46b94-273de75f115d69f622fd",
+          "file": "02_todo_full.spec.ts",
+          "line": 68,
+          "column": 5
+        },
+        {
+          "title": "04 删除待办",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 20303,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "Midscene - report file updated: D:\\qa-projects\\05-midscene-lab\\midscene_run\\report\\playwright-2026-09-22_10-50-45-b752a88d.html\n"
+                    }
+                  ],
+                  "stderr": [
+                    {
+                      "text": "[Midscene] [midscene:warning] waitForNetworkIdle is skipped for Playwright. Playwright does not provide an equivalent underlying capability for the intended post-action network idle behavior here.\n"
+                    }
+                  ],
+                  "retry": 0,
+                  "startTime": "2026-09-22T02:50:43.369Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e3f2c87e5799ecf46b94-acb35b4ae3aec19b24b6",
+          "file": "02_todo_full.spec.ts",
+          "line": 81,
+          "column": 5
+        },
+        {
+          "title": "08 超长文本边界",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1798,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-22T02:51:03.690Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e3f2c87e5799ecf46b94-a5f600d1e7e7abfe2297",
+          "file": "02_todo_full.spec.ts",
+          "line": 93,
+          "column": 5
+        },
+        {
+          "title": "10 纯空格输入",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2892,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-22T02:51:05.502Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e3f2c87e5799ecf46b94-fd3cbe3ad7f4d87cb5b7",
+          "file": "02_todo_full.spec.ts",
+          "line": 106,
+          "column": 5
+        },
+        {
+          "title": "14 不同分辨率下操作",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5717,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "Midscene - report file updated: D:\\qa-projects\\05-midscene-lab\\midscene_run\\report\\playwright-2026-09-22_10-51-10-ecbca35c.html\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-22T02:51:08.410Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e3f2c87e5799ecf46b94-ce77d834f2b69e6deca2",
+          "file": "02_todo_full.spec.ts",
+          "line": 118,
+          "column": 5
+        },
+        {
+          "title": "16 页面内容无法劫持 AI（Prompt 注入防护）",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 7230,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "Midscene - report file updated: D:\\qa-projects\\05-midscene-lab\\midscene_run\\report\\playwright-2026-09-22_10-51-16-2edc2ab2.html\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-22T02:51:14.148Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e3f2c87e5799ecf46b94-94c70da3dd518968a114",
+          "file": "02_todo_full.spec.ts",
+          "line": 132,
+          "column": 5
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-09-22T02:50:19.578Z",
+    "duration": 62247.907,
+    "expected": 7,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}
