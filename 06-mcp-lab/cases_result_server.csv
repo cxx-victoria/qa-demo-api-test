@@ -1,0 +1,29 @@
+﻿no,case,expected,actual,verdict
+1,握手成功,返回 serverInfo + 协议版本,"serverInfo={'name': 'demo-tasks', 'version': ''} protocolVersion=2025-06-18",PASS
+2,tools/list 返回 3 个工具,数量=3 且名称正确,"数量=3 名称=['add_task', 'list_tasks', 'delete_task']",PASS
+3,inputSchema 合法,均为 object 且含 properties,全部合法,PASS
+4,工具描述非空,都有 description,全部有描述,PASS
+5,add_task 合法标题,返回 created: xxx,"{""content"": [{""text"": ""created: 4b796e5a"", ""type"": ""text""}], ""isError"": false, """,PASS
+6,list_tasks 返回列表,包含刚创建的任务,"{""content"": [{""text"": ""[{'id': 'e2a230c5', 'title': 'Add', 'done': False}, {'id'",PASS
+7,delete_task 已存在 id,返回 deleted 且列表消失,"返回={""content"": [{""text"": ""deleted"", ""type"": 列表已消失=True",PASS
+8,add_task 缺 title,参数校验错误（不能崩）,"Error executing tool add_task: 1 validation error for add_taskArguments
+title
+  Field required [type=missing, ",PASS
+9,add_task title 传数字,类型校验失败,"Error executing tool add_task: 1 validation error for add_taskArguments
+title
+  Input should be a valid string",PASS
+10,add_task 空标题,应拒绝,"{""content"": [{""text"": ""created: dc49efea"", ""type"": ""text""}], ""isError"": false, ""structuredContent"": {""result"":",FAIL
+11,add_task 10000 字符,应拒绝或截断,"{""content"": [{""text"": ""created: fa9ae981"", ""type"": ""text""}], ""isError"": false, ""structuredContent"": {""result"":",FAIL
+12,特殊字符 / emoji,原样存储不乱码,回查包含=True,PASS
+13,多余参数,被忽略或明确报错,被忽略，正常创建,PASS
+14,delete_task 不存在的 id,应返回未找到,"返回={""content"": [{""text"": ""deleted"", ""type"": ""text""}], ""isError"": false, "" isError=False",FAIL
+15,delete_task 空 id,明确报错,"返回={""content"": [{""text"": ""deleted"", ""type"": ""text""}], ""isError"": false, "" isError=False",FAIL
+16,连续 20 次 tools/list,不报错,耗时 0.05s 全部成功=True,PASS
+17,调用不存在的工具,明确报错、不断连接,[tool 层] Unknown tool: not_exist_tool,PASS
+18,错误返回结构规范,JSON-RPC 信封完整 + isError/content,"keys=['jsonrpc', 'id', 'result'] isError=True",PASS
+19,快速连续 10 次 add_task,全部成功且 id 唯一,成功 10/10，去重后 10，耗时 0.06s,PASS
+20,100KB 超大参数,服务不崩溃,之后仍可通信=True,PASS
+22,路径穿越字符串,原样存储、服务不受影响,原样存储=True,PASS
+23,命令注入字符串,不执行且服务存活,原样存储=True 服务存活=True,PASS
+21,工具耗时超过客户端超时,客户端能感知超时,未覆盖：本 server 无慢工具（见报告说明）,SKIP
+24,长时间运行内存增长,记录基线判断泄漏,未覆盖：需外部监控工具持续采样（见报告说明）,SKIP

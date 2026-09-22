@@ -40,3 +40,5 @@ node_modules/
 # EvalScope 用的 Python 3.12 环境
 .venv312/
 
+# MCP 项目：SQLite 数据库是运行时产物，不进版本库
+*.db
