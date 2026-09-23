@@ -1,55 +1,89 @@
-<?xml version="1.0" encoding="UTF-8"?><testsuites><testsuite tests="7" errors="0" failures="4"><testcase id="C:\Users\A\Documents\Codex\2026-09-18\github-ai-issue-discussion-github-github\outputs\hurl-lab\cases\00_smoke.hurl" name="C:\Users\A\Documents\Codex\2026-09-18\github-ai-issue-discussion-github-github\outputs\hurl-lab\cases\00_smoke.hurl" time="0.009" /><testcase id="C:\Users\A\Documents\Codex\2026-09-18\github-ai-issue-discussion-github-github\outputs\hurl-lab\cases\10_flow_login_create_query.hurl" name="C:\Users\A\Documents\Codex\2026-09-18\github-ai-issue-discussion-github-github\outputs\hurl-lab\cases\10_flow_login_create_query.hurl" time="0.057" /><testcase id="C:\Users\A\Documents\Codex\2026-09-18\github-ai-issue-discussion-github-github\outputs\hurl-lab\cases\20_boundary_login_fail.hurl" name="C:\Users\A\Documents\Codex\2026-09-18\github-ai-issue-discussion-github-github\outputs\hurl-lab\cases\20_boundary_login_fail.hurl" time="0.007" /><testcase id="C:\Users\A\Documents\Codex\2026-09-18\github-ai-issue-discussion-github-github\outputs\hurl-lab\cases\30_defect_D1_long_title.hurl" name="C:\Users\A\Documents\Codex\2026-09-18\github-ai-issue-discussion-github-github\outputs\hurl-lab\cases\30_defect_D1_long_title.hurl" time="0.010"><failure>Assert status code
-  --&gt; C:\Users\A\Documents\Codex\2026-09-18\github-ai-issue-discussion-github-github\outputs\hurl-lab\cases\30_defect_D1_long_title.hurl:23:6
+<?xml version="1.0" encoding="UTF-8"?><testsuites><testsuite tests="39" errors="0" failures="13"><testcase id="D:\qa-projects\01-hurl-lab\cases\00_smoke.hurl" name="D:\qa-projects\01-hurl-lab\cases\00_smoke.hurl" time="0.050" /><testcase id="D:\qa-projects\01-hurl-lab\cases\10_flow_login_create_query.hurl" name="D:\qa-projects\01-hurl-lab\cases\10_flow_login_create_query.hurl" time="0.514" /><testcase id="D:\qa-projects\01-hurl-lab\cases\11_flow_query_missing_id.hurl" name="D:\qa-projects\01-hurl-lab\cases\11_flow_query_missing_id.hurl" time="0.045"><failure>Assert status code
+  --&gt; D:\qa-projects\01-hurl-lab\cases\11_flow_query_missing_id.hurl:5:6
+   |
+   | GET http://127.0.0.1:8000/tasks/this-id-does-not-exist
+ 5 | HTTP 404
+   |      ^^^ actual value is &lt;500&gt;
+   |</failure></testcase><testcase id="D:\qa-projects\01-hurl-lab\cases\20_boundary_login_fail.hurl" name="D:\qa-projects\01-hurl-lab\cases\20_boundary_login_fail.hurl" time="0.053" /><testcase id="D:\qa-projects\01-hurl-lab\cases\30_defect_D1_long_title.hurl" name="D:\qa-projects\01-hurl-lab\cases\30_defect_D1_long_title.hurl" time="0.044"><failure>Assert status code
+  --&gt; D:\qa-projects\01-hurl-lab\cases\30_defect_D1_long_title.hurl:23:6
    |
    | POST http://127.0.0.1:8000/tasks
    | ...
 23 | HTTP 201
    |      ^^^ actual value is &lt;422&gt;
-   |</failure></testcase><testcase id="C:\Users\A\Documents\Codex\2026-09-18\github-ai-issue-discussion-github-github\outputs\hurl-lab\cases\31_defect_D2_missing_id.hurl" name="C:\Users\A\Documents\Codex\2026-09-18\github-ai-issue-discussion-github-github\outputs\hurl-lab\cases\31_defect_D2_missing_id.hurl" time="0.014"><failure>Assert status code
-  --&gt; C:\Users\A\Documents\Codex\2026-09-18\github-ai-issue-discussion-github-github\outputs\hurl-lab\cases\31_defect_D2_missing_id.hurl:10:6
+   |</failure></testcase><testcase id="D:\qa-projects\01-hurl-lab\cases\31_defect_D2_missing_id.hurl" name="D:\qa-projects\01-hurl-lab\cases\31_defect_D2_missing_id.hurl" time="0.064"><failure>Assert status code
+  --&gt; D:\qa-projects\01-hurl-lab\cases\31_defect_D2_missing_id.hurl:10:6
    |
    | GET http://127.0.0.1:8000/tasks/this-id-does-not-exist
 10 | HTTP 404
    |      ^^^ actual value is &lt;500&gt;
-   |</failure></testcase><testcase id="C:\Users\A\Documents\Codex\2026-09-18\github-ai-issue-discussion-github-github\outputs\hurl-lab\cases\32_defect_D3_delete_without_auth.hurl" name="C:\Users\A\Documents\Codex\2026-09-18\github-ai-issue-discussion-github-github\outputs\hurl-lab\cases\32_defect_D3_delete_without_auth.hurl" time="0.083"><failure>Assert status code
-  --&gt; C:\Users\A\Documents\Codex\2026-09-18\github-ai-issue-discussion-github-github\outputs\hurl-lab\cases\32_defect_D3_delete_without_auth.hurl:26:6
+   |</failure></testcase><testcase id="D:\qa-projects\01-hurl-lab\cases\32_defect_D3_delete_without_auth.hurl" name="D:\qa-projects\01-hurl-lab\cases\32_defect_D3_delete_without_auth.hurl" time="0.328"><failure>Assert status code
+  --&gt; D:\qa-projects\01-hurl-lab\cases\32_defect_D3_delete_without_auth.hurl:26:6
    |
    | DELETE http://127.0.0.1:8000/tasks/{{task_id}}
 26 | HTTP 401
    |      ^^^ actual value is &lt;204&gt;
-   |</failure></testcase><testcase id="C:\Users\A\Documents\Codex\2026-09-18\github-ai-issue-discussion-github-github\outputs\hurl-lab\cases\33_defect_D4_done_type.hurl" name="C:\Users\A\Documents\Codex\2026-09-18\github-ai-issue-discussion-github-github\outputs\hurl-lab\cases\33_defect_D4_done_type.hurl" time="0.025"><failure>Assert failure
-  --&gt; C:\Users\A\Documents\Codex\2026-09-18\github-ai-issue-discussion-github-github\outputs\hurl-lab\cases\33_defect_D4_done_type.hurl:23:0
+   |</failure></testcase><testcase id="D:\qa-projects\01-hurl-lab\cases\33_defect_D4_done_type.hurl" name="D:\qa-projects\01-hurl-lab\cases\33_defect_D4_done_type.hurl" time="0.444"><failure>Assert failure
+  --&gt; D:\qa-projects\01-hurl-lab\cases\33_defect_D4_done_type.hurl:23:0
    |
    | POST http://127.0.0.1:8000/tasks
    | ...
 23 | jsonpath "$.done" isBoolean
    |   actual:   integer &lt;0&gt;
    |   expected: boolean
-   |</failure></testcase></testsuite><testsuite tests="7" errors="0" failures="4"><testcase id="C:\Users\A\Documents\Codex\2026-09-18\github-ai-issue-discussion-github-github\outputs\hurl-lab\cases\00_smoke.hurl" name="C:\Users\A\Documents\Codex\2026-09-18\github-ai-issue-discussion-github-github\outputs\hurl-lab\cases\00_smoke.hurl" time="0.012" /><testcase id="C:\Users\A\Documents\Codex\2026-09-18\github-ai-issue-discussion-github-github\outputs\hurl-lab\cases\10_flow_login_create_query.hurl" name="C:\Users\A\Documents\Codex\2026-09-18\github-ai-issue-discussion-github-github\outputs\hurl-lab\cases\10_flow_login_create_query.hurl" time="0.084" /><testcase id="C:\Users\A\Documents\Codex\2026-09-18\github-ai-issue-discussion-github-github\outputs\hurl-lab\cases\20_boundary_login_fail.hurl" name="C:\Users\A\Documents\Codex\2026-09-18\github-ai-issue-discussion-github-github\outputs\hurl-lab\cases\20_boundary_login_fail.hurl" time="0.007" /><testcase id="C:\Users\A\Documents\Codex\2026-09-18\github-ai-issue-discussion-github-github\outputs\hurl-lab\cases\30_defect_D1_long_title.hurl" name="C:\Users\A\Documents\Codex\2026-09-18\github-ai-issue-discussion-github-github\outputs\hurl-lab\cases\30_defect_D1_long_title.hurl" time="0.015"><failure>Assert status code
-  --&gt; C:\Users\A\Documents\Codex\2026-09-18\github-ai-issue-discussion-github-github\outputs\hurl-lab\cases\30_defect_D1_long_title.hurl:23:6
+   |</failure></testcase><testcase id="D:\qa-projects\01-hurl-lab\cases\40_normal_login.hurl" name="D:\qa-projects\01-hurl-lab\cases\40_normal_login.hurl" time="0.021" /><testcase id="D:\qa-projects\01-hurl-lab\cases\41_normal_create_task.hurl" name="D:\qa-projects\01-hurl-lab\cases\41_normal_create_task.hurl" time="0.074" /><testcase id="D:\qa-projects\01-hurl-lab\cases\42_normal_list_tasks.hurl" name="D:\qa-projects\01-hurl-lab\cases\42_normal_list_tasks.hurl" time="0.021" /><testcase id="D:\qa-projects\01-hurl-lab\cases\43_normal_get_task.hurl" name="D:\qa-projects\01-hurl-lab\cases\43_normal_get_task.hurl" time="0.386" /><testcase id="D:\qa-projects\01-hurl-lab\cases\44_normal_delete_task.hurl" name="D:\qa-projects\01-hurl-lab\cases\44_normal_delete_task.hurl" time="0.238" /><testcase id="D:\qa-projects\01-hurl-lab\cases\45_normal_chat.hurl" name="D:\qa-projects\01-hurl-lab\cases\45_normal_chat.hurl" time="1.414" /><testcase id="D:\qa-projects\01-hurl-lab\cases\50_boundary_title_empty.hurl" name="D:\qa-projects\01-hurl-lab\cases\50_boundary_title_empty.hurl" time="0.050"><failure>Assert status code
+  --&gt; D:\qa-projects\01-hurl-lab\cases\50_boundary_title_empty.hurl:15:6
    |
    | POST http://127.0.0.1:8000/tasks
    | ...
-23 | HTTP 201
-   |      ^^^ actual value is &lt;422&gt;
-   |</failure></testcase><testcase id="C:\Users\A\Documents\Codex\2026-09-18\github-ai-issue-discussion-github-github\outputs\hurl-lab\cases\31_defect_D2_missing_id.hurl" name="C:\Users\A\Documents\Codex\2026-09-18\github-ai-issue-discussion-github-github\outputs\hurl-lab\cases\31_defect_D2_missing_id.hurl" time="0.012"><failure>Assert status code
-  --&gt; C:\Users\A\Documents\Codex\2026-09-18\github-ai-issue-discussion-github-github\outputs\hurl-lab\cases\31_defect_D2_missing_id.hurl:10:6
+15 | HTTP 422
+   |      ^^^ actual value is &lt;201&gt;
+   |</failure></testcase><testcase id="D:\qa-projects\01-hurl-lab\cases\51_boundary_title_1_char.hurl" name="D:\qa-projects\01-hurl-lab\cases\51_boundary_title_1_char.hurl" time="0.412" /><testcase id="D:\qa-projects\01-hurl-lab\cases\52_boundary_title_100_chars.hurl" name="D:\qa-projects\01-hurl-lab\cases\52_boundary_title_100_chars.hurl" time="0.168" /><testcase id="D:\qa-projects\01-hurl-lab\cases\53_boundary_title_101_chars.hurl" name="D:\qa-projects\01-hurl-lab\cases\53_boundary_title_101_chars.hurl" time="0.042"><failure>Assert status code
+  --&gt; D:\qa-projects\01-hurl-lab\cases\53_boundary_title_101_chars.hurl:15:6
    |
-   | GET http://127.0.0.1:8000/tasks/this-id-does-not-exist
-10 | HTTP 404
+   | POST http://127.0.0.1:8000/tasks
+   | ...
+15 | HTTP 201
+   |      ^^^ actual value is &lt;422&gt;
+   |</failure></testcase><testcase id="D:\qa-projects\01-hurl-lab\cases\54_boundary_title_10000_chars.hurl" name="D:\qa-projects\01-hurl-lab\cases\54_boundary_title_10000_chars.hurl" time="0.040"><failure>Assert status code
+  --&gt; D:\qa-projects\01-hurl-lab\cases\54_boundary_title_10000_chars.hurl:13:6
+   |
+   | POST http://127.0.0.1:8000/tasks
+   | ...
+13 | HTTP 422
+   |      ^^^ actual value is &lt;201&gt;
+   |</failure></testcase><testcase id="D:\qa-projects\01-hurl-lab\cases\55_boundary_title_spaces.hurl" name="D:\qa-projects\01-hurl-lab\cases\55_boundary_title_spaces.hurl" time="0.095"><failure>Assert status code
+  --&gt; D:\qa-projects\01-hurl-lab\cases\55_boundary_title_spaces.hurl:14:6
+   |
+   | POST http://127.0.0.1:8000/tasks
+   | ...
+14 | HTTP 422
+   |      ^^^ actual value is &lt;201&gt;
+   |</failure></testcase><testcase id="D:\qa-projects\01-hurl-lab\cases\56_boundary_title_emoji.hurl" name="D:\qa-projects\01-hurl-lab\cases\56_boundary_title_emoji.hurl" time="0.165" /><testcase id="D:\qa-projects\01-hurl-lab\cases\57_boundary_title_chinese.hurl" name="D:\qa-projects\01-hurl-lab\cases\57_boundary_title_chinese.hurl" time="0.115" /><testcase id="D:\qa-projects\01-hurl-lab\cases\60_type_done_string.hurl" name="D:\qa-projects\01-hurl-lab\cases\60_type_done_string.hurl" time="0.557"><failure>Assert status code
+  --&gt; D:\qa-projects\01-hurl-lab\cases\60_type_done_string.hurl:14:6
+   |
+   | POST http://127.0.0.1:8000/tasks
+   | ...
+14 | HTTP 422
+   |      ^^^ actual value is &lt;201&gt;
+   |</failure></testcase><testcase id="D:\qa-projects\01-hurl-lab\cases\61_type_done_number.hurl" name="D:\qa-projects\01-hurl-lab\cases\61_type_done_number.hurl" time="0.034"><failure>Assert failure
+  --&gt; D:\qa-projects\01-hurl-lab\cases\61_type_done_number.hurl:17:0
+   |
+   | POST http://127.0.0.1:8000/tasks
+   | ...
+17 | jsonpath "$.done" isBoolean
+   |   actual:   integer &lt;1&gt;
+   |   expected: boolean
+   |</failure></testcase><testcase id="D:\qa-projects\01-hurl-lab\cases\62_type_done_null.hurl" name="D:\qa-projects\01-hurl-lab\cases\62_type_done_null.hurl" time="0.012" /><testcase id="D:\qa-projects\01-hurl-lab\cases\63_type_missing_title.hurl" name="D:\qa-projects\01-hurl-lab\cases\63_type_missing_title.hurl" time="0.010" /><testcase id="D:\qa-projects\01-hurl-lab\cases\64_type_extra_field.hurl" name="D:\qa-projects\01-hurl-lab\cases\64_type_extra_field.hurl" time="0.266" /><testcase id="D:\qa-projects\01-hurl-lab\cases\70_error_no_token.hurl" name="D:\qa-projects\01-hurl-lab\cases\70_error_no_token.hurl" time="0.003" /><testcase id="D:\qa-projects\01-hurl-lab\cases\71_error_bad_token.hurl" name="D:\qa-projects\01-hurl-lab\cases\71_error_bad_token.hurl" time="0.002" /><testcase id="D:\qa-projects\01-hurl-lab\cases\72_error_task_not_found.hurl" name="D:\qa-projects\01-hurl-lab\cases\72_error_task_not_found.hurl" time="0.045"><failure>Assert status code
+  --&gt; D:\qa-projects\01-hurl-lab\cases\72_error_task_not_found.hurl:4:6
+   |
+   | GET http://127.0.0.1:8000/tasks/does-not-exist-999
+ 4 | HTTP 404
    |      ^^^ actual value is &lt;500&gt;
-   |</failure></testcase><testcase id="C:\Users\A\Documents\Codex\2026-09-18\github-ai-issue-discussion-github-github\outputs\hurl-lab\cases\32_defect_D3_delete_without_auth.hurl" name="C:\Users\A\Documents\Codex\2026-09-18\github-ai-issue-discussion-github-github\outputs\hurl-lab\cases\32_defect_D3_delete_without_auth.hurl" time="0.041"><failure>Assert status code
-  --&gt; C:\Users\A\Documents\Codex\2026-09-18\github-ai-issue-discussion-github-github\outputs\hurl-lab\cases\32_defect_D3_delete_without_auth.hurl:26:6
+   |</failure></testcase><testcase id="D:\qa-projects\01-hurl-lab\cases\73_error_method_not_allowed.hurl" name="D:\qa-projects\01-hurl-lab\cases\73_error_method_not_allowed.hurl" time="0.001" /><testcase id="D:\qa-projects\01-hurl-lab\cases\74_error_limit_invalid.hurl" name="D:\qa-projects\01-hurl-lab\cases\74_error_limit_invalid.hurl" time="0.002" /><testcase id="D:\qa-projects\01-hurl-lab\cases\80_idempotent_create_twice.hurl" name="D:\qa-projects\01-hurl-lab\cases\80_idempotent_create_twice.hurl" time="0.018" /><testcase id="D:\qa-projects\01-hurl-lab\cases\81_idempotent_delete_twice.hurl" name="D:\qa-projects\01-hurl-lab\cases\81_idempotent_delete_twice.hurl" time="0.637" /><testcase id="D:\qa-projects\01-hurl-lab\cases\82_idempotent_login_twice.hurl" name="D:\qa-projects\01-hurl-lab\cases\82_idempotent_login_twice.hurl" time="0.002" /><testcase id="D:\qa-projects\01-hurl-lab\cases\90_security_sql_injection.hurl" name="D:\qa-projects\01-hurl-lab\cases\90_security_sql_injection.hurl" time="0.171" /><testcase id="D:\qa-projects\01-hurl-lab\cases\91_security_xss.hurl" name="D:\qa-projects\01-hurl-lab\cases\91_security_xss.hurl" time="0.122" /><testcase id="D:\qa-projects\01-hurl-lab\cases\92_security_unauthorized_delete.hurl" name="D:\qa-projects\01-hurl-lab\cases\92_security_unauthorized_delete.hurl" time="0.325"><failure>Assert status code
+  --&gt; D:\qa-projects\01-hurl-lab\cases\92_security_unauthorized_delete.hurl:20:6
    |
    | DELETE http://127.0.0.1:8000/tasks/{{task_id}}
-26 | HTTP 401
+20 | HTTP 401
    |      ^^^ actual value is &lt;204&gt;
-   |</failure></testcase><testcase id="C:\Users\A\Documents\Codex\2026-09-18\github-ai-issue-discussion-github-github\outputs\hurl-lab\cases\33_defect_D4_done_type.hurl" name="C:\Users\A\Documents\Codex\2026-09-18\github-ai-issue-discussion-github-github\outputs\hurl-lab\cases\33_defect_D4_done_type.hurl" time="0.052"><failure>Assert failure
-  --&gt; C:\Users\A\Documents\Codex\2026-09-18\github-ai-issue-discussion-github-github\outputs\hurl-lab\cases\33_defect_D4_done_type.hurl:23:0
-   |
-   | POST http://127.0.0.1:8000/tasks
-   | ...
-23 | jsonpath "$.done" isBoolean
-   |   actual:   integer &lt;0&gt;
-   |   expected: boolean
-   |</failure></testcase></testsuite></testsuites>
+   |</failure></testcase><testcase id="D:\qa-projects\01-hurl-lab\cases\93_security_token_reuse_after_relogin.hurl" name="D:\qa-projects\01-hurl-lab\cases\93_security_token_reuse_after_relogin.hurl" time="0.100" /></testsuite></testsuites>
