@@ -40,6 +40,14 @@ jobs:
         run: |
           hurl --test --report-junit reports/junit.xml --report-html reports/html cases/*.hurl
         continue-on-error: true
+
+      # ========== 【在这里新增图片里的步骤！】 ==========
+      # 新增：数据库一致性测试（API ↔ DB 交叉校验）
+      - name: Run DB consistency tests
+        working-directory: 07-db-lab
+        run: python -m pytest test_db_consistency.py -v
+        continue-on-error: true
+
       # 7.无论测试成功失败(if:always())，上传测试报告到制品
       - name: Upload test report
         uses: actions/upload-artifact@v4
