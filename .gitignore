@@ -42,3 +42,5 @@ node_modules/
 
 # MCP 项目：SQLite 数据库是运行时产物，不进版本库
 *.db
+# RAG embedding 缓存（跟模型和机器绑定，不提交）
+09-rag-lab/index_cache.json
