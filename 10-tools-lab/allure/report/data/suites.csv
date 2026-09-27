@@ -1,0 +1,38 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"【缺陷 D3 · 数据层】这条才是把严重度钉死的证据。
+
+接口层看到的是""返回码不对""（204 而应该是 401），
+数据层看到的是""别人的数据真的没了"" —— 两层证据叠加，
+才能把缺陷从""错误码不规范""升级为""高危越权 + 数据被破坏""。
+","45","test_unauthorized_delete_must_not_touch_data","","2026-09-27","skipped","2026-09-27","","test_db_consistency","",""
+"【缺陷 D4 · 数据层】库里 done 的真实类型是 0/1 整数，不是 boolean。","28","test_done_field_type_in_db","","2026-09-27","passed","2026-09-27","","test_db_consistency","",""
+"【缺陷 D3 · 接口层】不带 token 删除应当被拒绝（401）。","42","test_unauthorized_delete_should_be_rejected","","2026-09-27","skipped","2026-09-27","","test_db_consistency","",""
+"接口返回的列表，必须与数据库里的记录逐条一致（含顺序）。","36","test_api_list_matches_db_rows","","2026-09-27","passed","2026-09-27","","test_db_consistency","",""
+"全表扫描：title 不应为 NULL（NOT NULL 约束是否真的生效）。","14","test_all_titles_are_non_null","","2026-09-27","passed","2026-09-27","","test_db_consistency","",""
+"前置自检：测试读的数据库文件，必须和服务写的是同一个。
+
+为什么必须有这条：
+    如果 DEMO_DB 指错了文件，后面所有一致性用例都会失败，
+    但真正的原因只是""路径配错""，而不是被测系统有缺陷 ——
+    这属于典型的""环境问题伪装成缺陷""。
+    这条用例用一个探针任务把两者区分开，并直接告诉你排查方向。
+","9","test_test_db_is_same_file_service_writes","","2026-09-27","passed","2026-09-27","","test_db_consistency","",""
+"重复删除同一条：第二次应返回 404，并且库里始终没有这条记录。","42","test_delete_twice_keeps_db_clean","","2026-09-27","passed","2026-09-27","","test_db_consistency","",""
+"并发创建 8 条：全部应成功落库，且 id 不重复。
+
+这也是性能报告里""SQLite 单写锁导致部分请求 500""那个说法的数据层验证。
+","145","test_concurrent_creates_all_persisted","","2026-09-27","passed","2026-09-27","","test_db_consistency","",""
+"分页：limit + offset 取出来的切片，必须等于全量结果按同样方式切片。","18","test_list_pagination_is_consistent","","2026-09-27","passed","2026-09-27","","test_db_consistency","",""
+"创建接口返回 201 后，数据库里必须真的有这条记录，且字段值正确。","11","test_create_persists_to_db","","2026-09-27","passed","2026-09-27","","test_db_consistency","",""
+"边界内（100 字符）应当正常落库。","13","test_title_100_chars_is_persisted","","2026-09-27","passed","2026-09-27","","test_db_consistency","",""
+"边界外（101 字符）：实现返回 422，那就不能在库里留下记录。
+
+这条同时验证了""拒绝""是不是真的拒绝 —— 有的实现会先写库再报错。
+","3","test_title_101_chars_is_not_persisted","","2026-09-27","passed","2026-09-27","","test_db_consistency","",""
+"全表扫描：id 必须非空、唯一、32 位十六进制（uuid4().hex）。
+
+先自己造一条探针数据，保证表非空 —— 否则在空库上这条用例会误报
+（前面的用例跑完会清理掉自己创建的数据）。
+","21","test_all_ids_are_valid_uuid_hex","","2026-09-27","passed","2026-09-27","","test_db_consistency","",""
+"删除接口返回 204 后，数据库里这条记录必须真的消失。","58","test_delete_removes_row_from_db","","2026-09-27","passed","2026-09-27","","test_db_consistency","",""
+"空标题与纯空格不应落库（属于脏数据）。","29","test_empty_title_should_not_be_persisted","","2026-09-27","skipped","2026-09-27","","test_db_consistency","",""
