@@ -244,10 +244,10 @@ def test_list_pagination_is_consistent(token):
 # ==================================================================
 # 三、数据层看缺陷 D3：未授权删除的"真实严重性"
 # ==================================================================
-@pytest.mark.xfail(
-    reason="已知缺陷 D3：删除接口未校验 Authorization，未授权也能删（接口层证据）",
-    strict=False,
-)
+#@pytest.mark.xfail(
+    #reason="已知缺陷 D3：删除接口未校验 Authorization，未授权也能删（接口层证据）",
+   # strict=False,
+#)
 def test_unauthorized_delete_should_be_rejected(token, created):
     """【缺陷 D3 · 接口层】不带 token 删除应当被拒绝（401）。"""
     resp = create(token, unique_title("越权-接口层"))
@@ -261,10 +261,10 @@ def test_unauthorized_delete_should_be_rejected(token, created):
     )
 
 
-@pytest.mark.xfail(
-    reason="已知缺陷 D3：未授权删除不只是返回码错，数据真的被删了（数据层证据）",
-    strict=False,
-)
+#@pytest.mark.xfail(
+   # reason="已知缺陷 D3：未授权删除不只是返回码错，数据真的被删了（数据层证据）",
+   # strict=False,
+#)
 def test_unauthorized_delete_must_not_touch_data(token, db, created):
     """【缺陷 D3 · 数据层】这条才是把严重度钉死的证据。
 
@@ -310,10 +310,10 @@ def test_title_101_chars_is_not_persisted(token, db):
     assert leaked is None, "接口返回 422（拒绝），但数据仍然写进了库 —— 拒绝不彻底"
 
 
-@pytest.mark.xfail(
-    reason="已知问题：空标题/纯空格未被校验，会作为脏数据落库",
-    strict=False,
-)
+#@pytest.mark.xfail(
+   # reason="已知问题：空标题/纯空格未被校验，会作为脏数据落库",
+   # strict=False,
+#)
 def test_empty_title_should_not_be_persisted(token, created):
     """空标题与纯空格不应落库（属于脏数据）。"""
     for bad in ("", "   "):

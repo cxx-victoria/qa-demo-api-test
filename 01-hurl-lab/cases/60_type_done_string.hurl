@@ -11,5 +11,8 @@ POST http://127.0.0.1:8000/tasks
 Authorization: Bearer {{token}}
 Content-Type: application/json
 { "title": "类型测试", "done": "yes" }
-HTTP 422
+#HTTP 422
+HTTP 201
+[Asserts]
+jsonpath "$.done" isBoolean
 
