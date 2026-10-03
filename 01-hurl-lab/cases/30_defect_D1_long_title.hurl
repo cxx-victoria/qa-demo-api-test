@@ -1,4 +1,4 @@
-# 【缺陷复现 D1】契约不一致
+﻿# 【缺陷复现 D1】契约不一致
 #
 # 现象：接口文档（OpenAPI）里 title 是普通字符串，没有长度限制；
 #       但实现悄悄规定"超过 100 字符就返回 422"。
@@ -20,4 +20,6 @@ Content-Type: application/json
   "title": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
   "done": false
 }
-HTTP 201
+HTTP 422
+[Asserts]
+jsonpath "$.detail[0].msg" contains "100"
