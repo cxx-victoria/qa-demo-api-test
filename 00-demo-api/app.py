@@ -12,7 +12,6 @@ QA Demo API —— 专门为软件测试练习写的被测系统。
 """
 
 import os
-import sqlite3
 import uuid
 from typing import Optional
 
@@ -20,7 +19,9 @@ import requests
 from fastapi import FastAPI, Header, HTTPException, Query
 from pydantic import BaseModel, Field, field_validator
 
-DB_PATH = os.getenv("DEMO_DB", "tasks.db")
+
+from db import db 
+
 VALID_USER = {"username": "tester", "password": "123456"}
 TOKENS: dict[str, str] = {}          # token -> username（内存态，重启即失效）
 
@@ -32,14 +33,7 @@ app = FastAPI(
 
 
 # ---------------------------------------------------------------- 数据层
-def db() -> sqlite3.Connection:
-    conn = sqlite3.connect(DB_PATH)
-    conn.row_factory = sqlite3.Row
-    conn.execute(
-        "CREATE TABLE IF NOT EXISTS tasks ("
-        "  id TEXT PRIMARY KEY, title TEXT NOT NULL, done INTEGER DEFAULT 0)"
-    )
-    return conn
+
 
 
 # ---------------------------------------------------------------- 模型
@@ -113,11 +107,20 @@ def list_tasks(
     limit: int = Query(default=20, ge=1),
     offset: int = Query(default=0, ge=0),
 ):
+    #with db() as conn:
+       # rows = conn.execute(
+            #"SELECT id, title, done FROM tasks ORDER BY rowid LIMIT ? OFFSET ?",
+           # (limit, offset),
+        #).fetchall()
+
     with db() as conn:
         rows = conn.execute(
-            "SELECT id, title, done FROM tasks ORDER BY rowid LIMIT ? OFFSET ?",
+            "SELECT id, title, done FROM tasks ORDER BY id LIMIT ? OFFSET ?",
             (limit, offset),
         ).fetchall()
+
+
+
     return [{"id": r["id"], "title": r["title"], "done": bool(r["done"])} for r in rows]
 
 

@@ -45,6 +45,9 @@ API = os.environ.get("DEMO_API", "http://127.0.0.1:8000")
 CRED = {"username": "tester", "password": "123456"}
 MAX_ROWS = 5000
 
+BACKEND = os.environ.get("DB_BACKEND", "sqlite")      # sqlite | mysql
+
+
 HERE = Path(__file__).resolve().parent
 DB_CANDIDATES = [
     os.environ.get("DEMO_DB"),
@@ -75,22 +78,30 @@ def require_service():
 
 @pytest.fixture(scope="session")
 def db_path():
-    """定位 SQLite 数据库文件。"""
+    """定位 SQLite 数据库文件（仅 sqlite 模式用）。"""
     for cand in DB_CANDIDATES:
         if cand and Path(cand).exists():
             return Path(cand)
-    raise RuntimeError(
-        "找不到 tasks.db。已尝试以下位置：\n  "
-        + "\n  ".join(str(c) for c in DB_CANDIDATES)
-        + "\n可以用环境变量指定：$env:DEMO_DB = '完整路径\\tasks.db'"
-    )
+    raise RuntimeError("找不到 tasks.db。已尝试：\n  " + "\n  ".join(str(c) for c in DB_CANDIDATES))
 
 
 @pytest.fixture()
-def db(db_path):
-    """只读连接数据库：测试只做校验，不可能写坏数据。"""
-    uri = f"file:{db_path.as_posix()}?mode=ro"
-    conn = sqlite3.connect(uri, uri=True)
+def db():
+    """校验用连接：SQLite 用 mode=ro，MySQL 用只读账号 —— 两种都保证测试不可能写坏数据。"""
+    if BACKEND == "mysql":
+        import sys
+        sys.path.insert(0, str(HERE.parent / "00-demo-api"))
+        from db import db as make_conn          # 复用被测系统的适配层，避免两边配置不一致
+        conn = make_conn(readonly=True)
+        yield conn
+        conn.__exit__(None, None, None)
+        return
+
+    # ---------- SQLite（默认） ----------
+    path = next((c for c in DB_CANDIDATES if c and Path(c).exists()), None)
+    if path is None:
+        raise RuntimeError("找不到 tasks.db；或设置环境变量 DB_BACKEND=mysql 走 MySQL")
+    conn = sqlite3.connect(f"file:{Path(path).as_posix()}?mode=ro", uri=True)
     conn.row_factory = sqlite3.Row
     yield conn
     conn.close()
@@ -141,6 +152,8 @@ def row_of(db, task_id):
 # ==================================================================
 # 一、写操作：接口成功 ≠ 数据落库
 # ==================================================================
+@pytest.mark.skipif(BACKEND == "mysql",
+                    reason="同源自检用于 SQLite 场景（服务与测试可能连到不同文件）；MySQL 下双方连的是同一个库")
 def test_test_db_is_same_file_service_writes(token, db, db_path, created):
     """前置自检：测试读的数据库文件，必须和服务写的是同一个。
 
@@ -220,7 +233,8 @@ def test_api_list_matches_db_rows(token, db):
     api_rows = requests.get(f"{API}/tasks", params={"limit": MAX_ROWS}, timeout=10).json()
     db_rows = [
         dict(r) for r in db.execute(
-            "SELECT id, title, done FROM tasks ORDER BY rowid LIMIT ?", (MAX_ROWS,)
+            #"SELECT id, title, done FROM tasks ORDER BY rowid LIMIT ?", (MAX_ROWS,)
+                                    "SELECT id, title, done FROM tasks ORDER BY id LIMIT ?", (MAX_ROWS,)
         )
     ]
 
@@ -325,18 +339,28 @@ def test_empty_title_should_not_be_persisted(token, created):
 
 
 def test_done_field_type_in_db(token, db, created):
-    """【缺陷 D4 · 数据层】库里 done 的真实类型是 0/1 整数，不是 boolean。"""
+    """【缺陷 D4 · 数据层】库里 done 存的是整数 0/1，而接口契约声明 boolean。
+
+    注意：不能用 SQLite 的 typeof()（MySQL 没有这个函数，属数据库方言差异），
+    改成在 Python 侧判断类型 —— 两种数据库都能跑。
+    """
     resp = create(token, unique_title("类型校验"), done=True)
     task_id = resp.json()["id"]
     created.append(task_id)
 
-    raw = db.execute(
-        "SELECT done, typeof(done) AS t FROM tasks WHERE id = ?", (task_id,)
-    ).fetchone()
-    assert raw["t"] == "integer", f"库里 done 的类型是 {raw['t']}"
-    assert raw["done"] in (0, 1)
-    assert isinstance(resp.json()["done"], int), (
-        "接口返回的 done 是 int，与接口契约声明的 boolean 不一致（缺陷 D4）"
+    raw = db.execute("SELECT done FROM tasks WHERE id = ?", (task_id,)).fetchone()
+    value = raw["done"]
+
+    # ① 数据层：库里必须是整数 0/1（bool 是 int 的子类，所以要用 type() 严格判断）
+    assert type(value) is int, (
+        f"库里 done 期望是整数 0/1（不是布尔），实际是 {type(value).__name__}: {value!r}"
+    )
+    assert value in (0, 1), f"done 取值应为 0/1，实际 {value!r}"
+
+    # ② 接口层：D4 修复后统一返回布尔
+    api_done = resp.json()["done"]
+    assert type(api_done) is bool, (
+        f"接口返回的 done 期望是布尔，实际是 {type(api_done).__name__}: {api_done!r}"
     )
 
 

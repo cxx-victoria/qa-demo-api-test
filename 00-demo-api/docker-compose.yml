@@ -1,0 +1,40 @@
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: qa-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root123456
+      MYSQL_DATABASE: qa_demo
+      MYSQL_USER: qa
+      MYSQL_PASSWORD: qa123456
+      TZ: Asia/Shanghai
+    ports:
+      - "3307:3306"          # 宿主机用 3307，避免和本机可能已有的 MySQL 冲突
+    volumes:
+      - mysql-data:/var/lib/mysql
+      - ./init:/docker-entrypoint-initdb.d   # 首次启动自动执行这里的 .sql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-uroot", "-proot123456"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+
+  api:
+    build: .
+    container_name: qa-api
+    environment:
+      DB_BACKEND: mysql
+      DB_HOST: mysql           # 容器之间用「服务名」互相访问，不是 127.0.0.1
+      DB_PORT: "3306"
+      DB_USER: qa
+      DB_PASSWORD: qa123456
+      DB_NAME: qa_demo
+      TZ: Asia/Shanghai
+    ports:
+      - "8000:8000"
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+volumes:
+  mysql-data:
